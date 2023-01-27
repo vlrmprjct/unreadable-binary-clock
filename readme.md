@@ -3,6 +3,9 @@
 Shows the time in a binary way.
 But unreadable for humans.
 
+## PCB
+![](doc/3d_pcb.jpg)
+
 ## Example
 `00:10:01 ===   1001 ===          0011 11101001`
 
