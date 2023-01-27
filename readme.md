@@ -1,6 +1,7 @@
-# YABC | Yet Another Binary Clock v1.0.0b
+# UnBin | Unreadable Binary Clock v1.0.0b
 
 Shows the time in a binary way.
+But unreadable for humans.
 
 ## Example
 `00:10:01 ===   1001 ===          0011 11101001`
