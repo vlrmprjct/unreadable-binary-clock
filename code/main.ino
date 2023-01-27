@@ -58,11 +58,11 @@ void loop() {
     switch (encPos) {
     case 1:
         if (delayTime(250)) {
-            uint32_t ran = getRandomBits(24);
+            uint32_t randomBits = getRandomBits(24);
             digitalWrite(STCP, LOW);
-            shiftOut(DATA, SHCP, MSBFIRST, ran);
-            shiftOut(DATA, SHCP, MSBFIRST, (ran >> 8));
-            shiftOut(DATA, SHCP, MSBFIRST, (ran >> 16));
+            shiftOut(DATA, SHCP, MSBFIRST, randomBits);
+            shiftOut(DATA, SHCP, MSBFIRST, (randomBits >> 8));
+            shiftOut(DATA, SHCP, MSBFIRST, (randomBits >> 16));
             digitalWrite(STCP, HIGH);
         }
 
