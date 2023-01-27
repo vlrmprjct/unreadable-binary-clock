@@ -1,4 +1,3 @@
-#include "pattern.h";
 #include <RTClib.h>;
 
 #define OE    7 // OE
@@ -24,16 +23,6 @@ void setup() {
     pinMode(DATA, OUTPUT);
     pinMode(OE, OUTPUT);
 
-    // ENABLE IF THERE IS NO EXTERNAL RESISTOR
-    // pinMode(CLK, INPUT_PULLUP);
-    // pinMode(DT, INPUT_PULLUP);
-
-    // ENCODER INTERRUPT LISTENER
-    encLastState = digitalRead(CLK);
-    // PCB NOT SUPPORTED IN THIS WAY ON A ATTINY
-    // attachInterrupt(0, updateEncoder, CHANGE);
-    // attachInterrupt(1, updateEncoder, CHANGE);
-
     if (!RTC.begin()) {
         while (1)
             delay(10);
@@ -51,50 +40,11 @@ void loop() {
     DateTime now = RTC.now();
 
     char formatTime[6] = "hhmmss";
-    char formatDate[4] = "DDMM";
 
-    updateEncoder();
-
-    switch (encPos) {
-    case 1:
-        if (delayTime(250)) {
-            uint32_t ran = getRandomBits(24);
-            digitalWrite(STCP, LOW);
-            shiftOut(DATA, SHCP, MSBFIRST, ran);
-            shiftOut(DATA, SHCP, MSBFIRST, (ran >> 8));
-            shiftOut(DATA, SHCP, MSBFIRST, (ran >> 16));
-            digitalWrite(STCP, HIGH);
-        }
-
-        break;
-    case 2:
-        digitalWrite(STCP, LOW);
-        shiftOut(DATA, SHCP, MSBFIRST, knight[pattern][2]);
-        shiftOut(DATA, SHCP, MSBFIRST, knight[pattern][1]);
-        shiftOut(DATA, SHCP, MSBFIRST, knight[pattern][0]);
-        digitalWrite(STCP, HIGH);
-
-        if(delayTime(50)) pattern = (pattern + 1) % 49;
-
-        break;
-    case 3:
-        digitalWrite(STCP, LOW);
-        shiftOut(DATA, SHCP, MSBFIRST, police[pattern][2]);
-        shiftOut(DATA, SHCP, MSBFIRST, police[pattern][1]);
-        shiftOut(DATA, SHCP, MSBFIRST, police[pattern][0]);
-        digitalWrite(STCP, HIGH);
-
-        if (delayTime(100)) pattern = (pattern + 1) % 8;
-
-        break;
-    default:
-        uint32_t currentTime = strtoul(now.toString(formatTime), NULL, 10);
-        digitalWrite(STCP, LOW);
-        shiftOut(DATA, SHCP, MSBFIRST, currentTime);
-        shiftOut(DATA, SHCP, MSBFIRST, (currentTime >> 8));
-        shiftOut(DATA, SHCP, MSBFIRST, (currentTime >> 16));
-        digitalWrite(STCP, HIGH);
-
-        break;
-    }
+    uint32_t currentTime = strtoul(now.toString(formatTime), NULL, 10);
+    digitalWrite(STCP, LOW);
+    shiftOut(DATA, SHCP, MSBFIRST, currentTime);
+    shiftOut(DATA, SHCP, MSBFIRST, (currentTime >> 8));
+    shiftOut(DATA, SHCP, MSBFIRST, (currentTime >> 16));
+    digitalWrite(STCP, HIGH);
 }
