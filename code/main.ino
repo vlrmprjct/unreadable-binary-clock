@@ -57,11 +57,6 @@ void loop() {
 
     switch (encPos) {
     case 1:
-    case 4:
-    case 7:
-    case 10:
-    case 13:
-    case 16:
         if (delayTime(250)) {
             uint32_t randomBits = getRandomBits(24);
             digitalWrite(STCP, LOW);
@@ -73,11 +68,6 @@ void loop() {
 
         break;
     case 2:
-    case 5:
-    case 8:
-    case 11:
-    case 14:
-    case 17:
         digitalWrite(STCP, LOW);
         shiftOut(DATA, SHCP, MSBFIRST, knight[pattern][2]);
         shiftOut(DATA, SHCP, MSBFIRST, knight[pattern][1]);
@@ -88,11 +78,6 @@ void loop() {
 
         break;
     case 3:
-    case 6:
-    case 9:
-    case 12:
-    case 15:
-    case 18:
         digitalWrite(STCP, LOW);
         shiftOut(DATA, SHCP, MSBFIRST, police[pattern][2]);
         shiftOut(DATA, SHCP, MSBFIRST, police[pattern][1]);

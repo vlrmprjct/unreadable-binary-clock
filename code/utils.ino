@@ -23,9 +23,9 @@ void updateEncoder() {
     encCurrentState = digitalRead(CLK);
     if (encCurrentState != encLastState && encCurrentState == 0) {
         if (digitalRead(DT)) {
-            encPos = (encPos + 1) % 20;
+            encPos = (encPos + 1) % 4;
         } else {
-            encPos = (encPos + 19) % 20;
+            encPos = (encPos + 3) % 4;
         }
     }
     encLastState = encCurrentState;
