@@ -74,7 +74,7 @@ void loop() {
         shiftOut(DATA, SHCP, MSBFIRST, knight[pattern][0]);
         digitalWrite(STCP, HIGH);
 
-        if(delayTime(50)) pattern = (pattern + 1) % 49;
+        if(delayTime(50)) pattern = (pattern + 1) % 37;
 
         break;
     case 3:
